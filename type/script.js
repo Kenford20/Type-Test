@@ -4,21 +4,43 @@ window.onload=function() {
 
 // Global Variables
 // -------------------------------------------
-var a = document.querySelector("#sub-button");
-var restartbtn = document.querySelector("#restart");
-var text = document.querySelector("#typing-box");
-var textbtn = document.querySelector("#new-text");
-var quoteurl = "https://talaikis.com/api/quotes/random/";
-var minutes = 0, seconds=0, ms = 0; // starting value for the timer
+const restartbtn = document.querySelector("#restart");
+const text = document.querySelector("#typing-box");
+const textbtn = document.querySelector("#new-text");
+
+var APIurl = " "; // change the API url to request from based on user input
+var minutes = 0, seconds = 0, ms = 0; // starting value for the timer
+var alertMessage = "Congratulations, you completed the test in " + minutes.value + " minutes and " + seconds + "." + ms + " seconds";
+var interval;
+var AJAXrequest;
+var AJAXdata;
 
 // Function Defitions
 // ------------------------------------------------
+function dropdownSelection() {
+	let dropdownChoice = document.querySelector(".select-box").value;
+	console.log(dropdownChoice);
+	
+	switch(dropdownChoice){
+		case '1':
+			APIurl = "https://talaikis.com/api/quotes/random/";
+			break;
+		case '2':	
+			APIurl = "https://talaikis.com/api/quotes/random/";
+			break;
+		case '3':
+			APIurl = " ";
+			break;
+	}
+}
+
 function sendRequest() {
 	//console.log(restartbtn);
-	var AJAXrequest = new XMLHttpRequest();
-	AJAXrequest.open('GET', quoteurl);
+	dropdownSelection();
+	AJAXrequest = new XMLHttpRequest();
+	AJAXrequest.open('GET', APIurl);
 	AJAXrequest.onload = function(){
-		var AJAXdata = JSON.parse(AJAXrequest.responseText);
+		AJAXdata = JSON.parse(AJAXrequest.responseText);
 		renderHTML(AJAXdata);
 	};
 	AJAXrequest.send();
@@ -26,15 +48,35 @@ function sendRequest() {
 
 // changes the test text whenever the "new text" button is clicked
 function renderHTML(data){
-	console.log(data)
+	//console.log(data);
 	document.querySelector("#quote-api").innerHTML = data.quote;
+
 }
 
-function logTextInput() {
-	console.log(text.value);
+// check if input text equals test text, then changes border color accordingly
+function checkStringEquality() {
+//	console.log(AJAXdata.quote);
+//	console.log(text.value);
+
+	let textInput = text.value;
+	let parsedText = AJAXdata.quote.substring(0,textInput.length);
+
+	//console.log(parsedText);
+
+	if(textInput == AJAXdata.quote){
+		text.style.border = "5px solid green";
+		clearInterval(interval);
+		alert(alertMessage);
+	}
+		else if(textInput == parsedText){
+			text.style.border = "5px solid blue";
+		}
+		else{
+			text.style.border = "5px solid red";
+		}
 }
 
-// adds the leading zeros to the timer
+// adds the leading zeros to the timer when they're single digit
 function displayZero(time){
 	if(time <= 9) {
 		time = "0" + time;
@@ -62,15 +104,25 @@ function runTimer(){
 // checks when user begins typing, then calls runTimer to start the timer
 function startTimer(){
 	let textLength = text.value.length;
+
 	if(textLength === 0){
-		setInterval(runTimer, 10) // run function every hundred of a second
+		interval = setInterval(runTimer, 10) // run function every hundred of a second
 	}
+}
+
+// reset timer and input box when button is pressed
+function restartTest(){
+	clearInterval(interval);
+	document.querySelector(".timer").innerHTML = "00:00:00";
+	text.value = "";
+	minutes = 0; seconds = 0; ms = 0;
 }
 
 // main()
 // ----------------------------------------------------
 //restartbtn.addEventListener("click", , false);
-text.addEventListener("keyup", logTextInput, false);
+text.addEventListener("keyup", checkStringEquality, false);
 text.addEventListener("keypress", startTimer, false);
 textbtn.addEventListener("click", sendRequest, false);
+restartbtn.addEventListener("click", restartTest, false);
 }
