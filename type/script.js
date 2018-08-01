@@ -1,9 +1,9 @@
-
 //HTML document needs to fully load before running js or errors may occur
 window.onload=function() {
 
 // Global Variables
 // -------------------------------------------
+const subbtn = document.querySelector("#sub-button")
 const restartbtn = document.querySelector("#restart");
 const text = document.querySelector("#typing-box");
 const textbtn = document.querySelector("#new-text");
@@ -36,6 +36,7 @@ function dropdownSelection() {
 
 function sendRequest() {
 	//console.log(restartbtn);
+	restartTest();
 	dropdownSelection();
 	AJAXrequest = new XMLHttpRequest();
 	AJAXrequest.open('GET', APIurl);
@@ -59,20 +60,22 @@ function checkStringEquality() {
 //	console.log(text.value);
 
 	let textInput = text.value;
-	let parsedText = AJAXdata.quote.substring(0,textInput.length);
+	let completeTestText = document.querySelector("#quote-api").innerHTML;
+	let parsedTestText = document.querySelector("#quote-api").innerHTML.substring(0,textInput.length);
+	console.log(parsedTestText);	
 
 	//console.log(parsedText);
 
-	if(textInput == AJAXdata.quote){
-		text.style.border = "5px solid green";
+	if(textInput == completeTestText){
+		text.style.border = "6px solid green";
 		clearInterval(interval);
 		alert(alertMessage);
 	}
-		else if(textInput == parsedText){
-			text.style.border = "5px solid blue";
+		else if(textInput == parsedTestText){
+			text.style.border = "6px solid blue";
 		}
 		else{
-			text.style.border = "5px solid red";
+			text.style.border = "8px solid red";
 		}
 }
 
@@ -96,10 +99,11 @@ function runTimer(){
 	}
 
 	if(ms === 100){
-		ms=0;
+			ms=0;
 		seconds++;
 	}
 }
+
 
 // checks when user begins typing, then calls runTimer to start the timer
 function startTimer(){
@@ -116,13 +120,27 @@ function restartTest(){
 	document.querySelector(".timer").innerHTML = "00:00:00";
 	text.value = "";
 	minutes = 0; seconds = 0; ms = 0;
+	text.style.border = "6px solid grey";
 }
+
+/*
+function createRandom() {
+  var text2 = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 50; i++) {
+   		 text2 += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	console.log(text2);
+	document.querySelector("#quote-api").innerHTML = text2;
+}
+*/
 
 // main()
 // ----------------------------------------------------
-//restartbtn.addEventListener("click", , false);
 text.addEventListener("keyup", checkStringEquality, false);
 text.addEventListener("keypress", startTimer, false);
 textbtn.addEventListener("click", sendRequest, false);
 restartbtn.addEventListener("click", restartTest, false);
+//restartbtn.addEventListener("click", createRandom, false);
 }
