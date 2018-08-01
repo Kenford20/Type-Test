@@ -5,9 +5,11 @@ window.onload=function() {
 // -------------------------------------------
 const subbtn = document.querySelector("#sub-button")
 const restartbtn = document.querySelector("#restart");
-const text = document.querySelector("#typing-box");
 const textbtn = document.querySelector("#new-text");
+const text = document.querySelector("#typing-box");
+const dropdownChoice = document.querySelector(".select-box");
 
+var testText = document.querySelector("#quote-api");
 var APIurl = " "; // change the API url to request from based on user input
 var minutes = 0, seconds = 0, ms = 0; // starting value for the timer
 var alertMessage = "Congratulations, you completed the test in " + minutes.value + " minutes and " + seconds + "." + ms + " seconds";
@@ -18,40 +20,49 @@ var AJAXdata;
 // Function Defitions
 // ------------------------------------------------
 function dropdownSelection() {
-	let dropdownChoice = document.querySelector(".select-box").value;
-	console.log(dropdownChoice);
+	console.log(dropdownChoice.value);
 	
-	switch(dropdownChoice){
+	switch(dropdownChoice.value){
 		case '1':
 			APIurl = "https://talaikis.com/api/quotes/random/";
 			break;
 		case '2':	
-			APIurl = "https://talaikis.com/api/quotes/random/";
+			APIurl = " ";
+			//createRandomText();
 			break;
 		case '3':
 			APIurl = " ";
 			break;
-	}
+		}
 }
 
-function sendRequest() {
+function changeTestText() {
 	//console.log(restartbtn);
 	restartTest();
 	dropdownSelection();
-	AJAXrequest = new XMLHttpRequest();
-	AJAXrequest.open('GET', APIurl);
-	AJAXrequest.onload = function(){
-		AJAXdata = JSON.parse(AJAXrequest.responseText);
-		renderHTML(AJAXdata);
-	};
-	AJAXrequest.send();
+
+	if(dropdownChoice.value == '1'){
+		AJAXrequest = new XMLHttpRequest();
+		AJAXrequest.open('GET', APIurl);
+		AJAXrequest.onload = function(){
+			testText.innerHTML = JSON.parse(AJAXrequest.responseText).quote;
+			//AJAXdata = JSON.parse(AJAXrequest.responseText);
+			//renderHTML(AJAXdata);
+		};
+		AJAXrequest.send();
+	}
+	
+	else if(dropdownChoice.value == '2')
+		createRandomText();
 }
 
 // changes the test text whenever the "new text" button is clicked
 function renderHTML(data){
 	//console.log(data);
-	document.querySelector("#quote-api").innerHTML = data.quote;
-
+	if(dropdownChoice.value == '1')
+		testText.innerHTML = data.quote;
+	else if(dropdownChoice.value == '2')
+		createRandomText();
 }
 
 // check if input text equals test text, then changes border color accordingly
@@ -123,8 +134,9 @@ function restartTest(){
 	text.style.border = "6px solid grey";
 }
 
-/*
-function createRandom() {
+// function creates a string a random alphanumberic characters
+// change the value of the second parameter of the for loop to control length
+function createRandomText() {
   var text2 = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -134,13 +146,13 @@ function createRandom() {
 	console.log(text2);
 	document.querySelector("#quote-api").innerHTML = text2;
 }
-*/
+
 
 // main()
 // ----------------------------------------------------
 text.addEventListener("keyup", checkStringEquality, false);
 text.addEventListener("keypress", startTimer, false);
-textbtn.addEventListener("click", sendRequest, false);
+textbtn.addEventListener("click", changeTestText, false);
 restartbtn.addEventListener("click", restartTest, false);
-//restartbtn.addEventListener("click", createRandom, false);
+//restartbtn.addEventListener("click", createRandomText, false);
 }
