@@ -9,7 +9,7 @@
 
 .btn{
 	height:40px;
-	width:100px;
+	width:150px;
 	background:white;
 	color:green;
 }
@@ -34,12 +34,8 @@ header section{
 header nav{
 	float:right;
 	padding-top:10px;
-	margin-left:275px;
-	position:absolute;
-}
-
-ul{
-	padding-right:100px;
+	/*margin-left:275px;*/
+	position:relative;
 }
 
 a{
@@ -77,9 +73,29 @@ body{
 	margin:0px;
 	padding:-1px;
 	background-color:#deffff;
+	background:linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.65)),
+	url(typing.jpg) no-repeat;
+	background-size: cover;
+}
+/*
+#background-pic{
+	text-align:center;
+	border-radius:10px;
+	margin-top: 20px;
+	width:80%;
+	height:250px;
+	background:linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.65)),
+	url(typing.jpg) no-repeat;
+	background-size: cover;
+}*/
+
+#background-pic {
+	padding-top:10px;
+	text-align:center;
 }
 
 body #quote-api{
+	margin-top: 20px;
 	background-color:lightblue;
 	border:5px solid #deeeee;
 	border-radius:7px;
@@ -89,7 +105,7 @@ body #quote-api{
 #typing-box{
 	height:150px;
 	width:90%;
-	padding:7px 40px;
+		padding:7px 40px;
 	border:5px solid gray;
 	border-radius:5px;
 	font-size:1.2em;
@@ -104,15 +120,21 @@ body #quote-api{
 	float:right;
 }
 
-.timer{
-	margin-top:10px;
-	margin-bottom:7px;
+#clock{
 	font-weight:bold;
-	font-size:36px;
+	font-size:20px;
 }
+
+#clock > div{
+	width:150px;
+	display:inline-block;
+	padding-right:20px;
+}
+
 
 form input{
 	height:30px;
+	width:220px;
 	margin-right:5px;
 }
 
