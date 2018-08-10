@@ -34,7 +34,6 @@ header section{
 header nav{
 	float:right;
 	padding-top:10px;
-	/*margin-left:275px;*/
 	position:relative;
 }
 
@@ -104,12 +103,13 @@ body #quote-api{
 
 #typing-box{
 	height:150px;
-	width:90%;
-		padding:7px 40px;
+	width:100%;
+	padding:7px 40px;
 	border:5px solid gray;
 	border-radius:5px;
 	font-size:1.2em;
 	margin-top:15px;
+	box-sizing: border-box;
 }
 
 .text-box{
@@ -204,39 +204,134 @@ body select {
 
 /* Footer Styles
 ---------------------*/
-footer{
-	font-family:sans-serif;
-	font-size:12px;
-	padding-top:10px;
+#footer-nav ul{
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+
+#footer-nav li{
+	display:inline-block;
+	font-size:0.7em;
+	padding:5px;
+}
+
+#footer-nav a{
+	color:blue;
+}
+
+#footer-nav{
+	border-top: 2px solid black;
+	margin-top:35px;
+	background-color:white;
+	width:100%;
+}
+
+#footer-nav div{
 	width:77%;
 	margin:auto;
+	padding-top:3px;
 }
-	
 
+#footer-nav h6{
+	font-size:9px;
+	margin-bottom:1px;
+}
 
 /* Media Queries
 ------------------*/
-@media only screen and (max-width: 800px){
-	section#top-header{
-		margin:0;
-		padding:0;
-		background-color:red;
-		text-align: center;
-	}
-
-	#title, header nav, ul{
-		padding:0px;
-		margin:0px;
-		text-align:center;
-		float:none;
-		position:static;
-	}
-
-	header li{
-		display:block;
+@media only screen and (min-width: 320px) and (max-width: 750px){
+	.container{
+		width:90%;
 	}
 
 	body{
+		font-size: 0.6em;
+	}
+
+	header,
+	header #top-header,
+	header #title,
+	header nav,
+	header ul,
+	header li{
+		float:none;
+		border:none;
+		border-radius:0;
+		margin:0;
+		padding:0;
+		height:auto;
+	}
+
+	header li{
+		background:grey;
+		font-size:1.2em;
+		padding:5px;
+	}
+
+	a{
+		color:lightgrey;
+	}
+
+	#top-header, header nav{
+		display:block;
 		text-align:center;
 	}
+
+	#top-header{
+		width:100%;
+		background-color:grey;
+	}
+
+	#option-and-btns, #newsletter, #footer-nav{
+		text-align:center;
+	}
+
+	header{
+		border-bottom:4px solid black;
+	}
+
+	body h1 ,#clock{
+		font-size:15px;
+	}
+
+	.select-box{
+		width:300px;
+		padding: 5px 30px 5px 13px !important;
+		font-size:10px;
+		text-align-last:center;
+
+	}
+
+	.btn{
+		font-size:10px;
+		margin-top:5px;
+		height:30px;
+		width:135px;
+	}
+
+	#clock .timer,
+	#clock .WPM,
+	#clock .CPM {
+		margin:0;
+		width:100px;
+		font-size:10px;
+	}
+
+	#clock div{	
+		margin-top:5px;
+		margin-bottom:5px;
+		padding:0;
+		width:85px;
+		text-align:center;
+	}
+
+	#footer-nav h6{
+		font-size:8px;
+	}
+
+	#newsletter input{
+		height:21px;
+	}
+
 }
