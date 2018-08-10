@@ -19,13 +19,15 @@
 <header>
 <section id="top-header">
 	<div id="title"><h2>Kenford's Typing Test</h2></div>
-		<nav>
-			<ul>
-				<li class="button"> <a href="#"> Home </a></li>
-				<li class="button"> <a href="#"> About </a></li>
-				<li class="button	"> <a href="#"> Log In </a></li>
-			</ul>
-		</nav>
+		<div id="nav-div"> 	
+			<nav>
+				<ul>
+					<li class="button"> <a href="#"> Home </a></li>
+					<li class="button"> <a href="#"> About </a></li>
+					<li class="button"> <a href="#"> Log In </a></li>
+				</ul>
+			</nav>
+		</div>
 </section>
 </header>
 
@@ -35,11 +37,11 @@
 		<h1> Simple Quick and Accurate Results </h1>
 		<p> Welcome to Kenford's Typing Speed Test! Try and type the different types of texts below as fast as you can! </p>
 	</div>
-	<div class = "container"> 
+	<div class="container"> 
 		<!--create the box to contain the quote-->
 		<section class="quote-box">
 			<div id="quote-api">
-				<p> ARE YOU READY???? Click the 'New Text' button to grab a piece of text to begin! </p>
+				<p> ARE YOU READY???? Select the type of test below and click the 'New Text' button to grab a piece of text to begin! </p>
 			</div>
 		</section>
 	</div>
@@ -56,14 +58,16 @@
 			<div><h1 class="CPM"> CPM: 00 </h1></div>
 			<div><h1 class="WPM"> WPM: 00 </h1></div>
 		</section>
-		<select class="select-box">
-			<option value="quote">Quotes (Quick Test)</option>
-			<option value="alphanumeric">Alphanumeric (Hard Test)</option>
-			<option value="paragraph">Paragraph (Long Test)</option>
-			<option value="jokes">Jokes (Quick Test)</option>
-		</select>
-		<button class="btn" id="restart">Restart</button>
-		<button class="btn" id="new-text">New Text</button>
+		<section id="option-and-btns">
+			<select class="select-box">
+				<option value="quote">Quotes (Quick Test)</option>
+				<option value="alphanumeric">Alphanumeric (Hard Test)</option>
+				<option value="paragraph">Paragraph (Long Test)</option>
+				<option value="words">List of Words (Words Test)</option>
+			</select>
+			<button class="btn" id="restart">Restart</button>
+			<button class="btn" id="new-text">New Text</button>
+		</section>
 	</div>
 
     <section id="newsletter">
@@ -75,10 +79,17 @@
         	</form>
         </div>
     </section>
-</body>
 
-<footer class="footer">
-	copyright 2018 -- Kenford
-</footer>
+    <section class="container" id="footer-nav">
+    	<div>
+	    	<ul>
+				<li class="button"> <a href="#"> Contact </a></li>
+				<li class="button"> <a href="#"> Terms </a></li>
+				<li class="button"> <a href="#"> Privacy Policy </a></li>
+			</ul>
+			<h6> © 2018 Kenford, Inc. </h3>
+		</div>
+    </section>
+</body>
 
 </html>
